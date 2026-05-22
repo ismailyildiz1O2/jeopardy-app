@@ -241,7 +241,7 @@ export default function EditPanel({
                         : 'bg-white/5 text-white/40 border border-white/5'
                     }`}
                   >
-                    Görsel
+                    Image
                   </button>
                   <button
                     onClick={() => handleMediaTypeChange('video')}
