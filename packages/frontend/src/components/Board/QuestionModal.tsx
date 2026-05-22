@@ -90,7 +90,7 @@ export default function QuestionModal({
                   {category.name}
                 </span>
                 <span className="text-gold-400 font-extrabold text-lg">
-                  {question.points} Puan
+                  {question.points} Points
                 </span>
               </div>
               <button
@@ -116,7 +116,7 @@ export default function QuestionModal({
                               font-bold text-white leading-relaxed">
                   {question.questionText || (
                     <span className="text-white/30 italic">
-                      Soru girilmemiş
+                      No question entered
                     </span>
                   )}
                 </p>
@@ -131,7 +131,7 @@ export default function QuestionModal({
                   >
                     <img
                       src={question.mediaUrl}
-                      alt="Soru görseli"
+                      alt="Question image"
                       className="max-h-60 sm:max-h-80 rounded-xl border border-white/10
                                  shadow-lg object-contain"
                     />
@@ -162,7 +162,7 @@ export default function QuestionModal({
                                     text-gold-300 leading-relaxed">
                         {question.answerText || (
                           <span className="text-white/30 italic">
-                            Cevap girilmemiş
+                            No answer entered
                           </span>
                         )}
                       </p>
@@ -197,7 +197,7 @@ export default function QuestionModal({
                 <p className="text-xs font-semibold uppercase tracking-wider
                               text-white/40 mb-3 text-center">
                   <Award className="w-3.5 h-3.5 inline mr-1" />
-                  Puan Ver
+                  Points Ver
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {teams.map((team) => (

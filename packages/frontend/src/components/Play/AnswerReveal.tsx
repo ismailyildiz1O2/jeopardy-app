@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // AnswerReveal – flip card animation for Q&A display
 // =============================================
 import { useState } from 'react';
@@ -40,11 +40,11 @@ export default function AnswerReveal({
           }}
         >
           <p className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-1">
-            Soru • {points} Puan
+            Question • {points} Points
           </p>
           <p className="text-lg sm:text-xl font-bold text-white leading-relaxed">
             {questionText || (
-              <span className="text-white/30 italic">Soru yok</span>
+              <span className="text-white/30 italic">Question yok</span>
             )}
           </p>
           <p className="mt-4 text-[10px] text-white/20 flex items-center gap-1">
@@ -68,12 +68,12 @@ export default function AnswerReveal({
           </p>
           <p className="text-lg sm:text-xl font-bold text-gold-300 leading-relaxed">
             {answerText || (
-              <span className="text-white/30 italic">Cevap yok</span>
+              <span className="text-white/30 italic">No answer</span>
             )}
           </p>
           <p className="mt-4 text-[10px] text-white/20 flex items-center gap-1">
             <RotateCw className="w-3 h-3" />
-            Soruya dönmek için tıklayın
+            Click to return to question
           </p>
         </div>
       </motion.div>

@@ -66,7 +66,7 @@ export default function CategoryHeader({
       transition={{ delay: category.position * 0.05 }}
       onClick={handleClick}
       className={`
-        board-cell relative flex items-center justify-center
+        board-cell group relative flex items-center justify-center
         rounded-lg overflow-hidden
         ${mode === 'edit' ? 'cursor-pointer' : 'cursor-default'}
       `}

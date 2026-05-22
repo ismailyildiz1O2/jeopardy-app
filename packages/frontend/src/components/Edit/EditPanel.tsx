@@ -162,7 +162,7 @@ export default function EditPanel({
                   {category.name}
                 </p>
                 <p className="text-gold-400 font-extrabold text-lg">
-                  {question.points} Puan
+                  {question.points} Points
                 </p>
               </div>
               <button
