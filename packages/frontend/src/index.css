@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   GLOBAL BASE STYLES
+   ============================================= */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-jeopardy-navy text-white min-h-screen;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-neon-blue/30 text-white;
+  }
+}
+
+/* =============================================
+   CUSTOM SCROLLBAR – DARK THEMED
+   ============================================= */
+@layer components {
+  /* Custom scrollbar for webkit browsers */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-jeopardy-navy/50 rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-jeopardy-blue/80 rounded-full;
+    border: 1px solid rgba(59, 59, 255, 0.2);
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-jeopardy-royal/80;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* =============================================
+   HORIZONTAL SCROLL-SNAP FOR MOBILE GRID
+   ============================================= */
+@layer components {
+  .board-scroll-container {
+    @apply overflow-x-auto overflow-y-hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding: 0 16px;
+  }
+  .board-scroll-container::-webkit-scrollbar {
+    height: 4px;
+  }
+  .board-scroll-container::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .board-scroll-container::-webkit-scrollbar-thumb {
+    @apply bg-jeopardy-royal/60 rounded-full;
+  }
+}
+
+/* =============================================
+   GLASSMORPHISM UTILITY CLASSES
+   ============================================= */
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-lg;
+  }
+  .glass-strong {
+    @apply bg-white/10 backdrop-blur-xl border border-white/15 shadow-xl;
+  }
+  .glass-card {
+    @apply bg-white/[0.07] backdrop-blur-lg border border-white/10 rounded-xl shadow-lg;
+  }
+  .glass-surface {
+    @apply bg-jeopardy-surface/80 backdrop-blur-md border border-white/5 rounded-lg;
+  }
+  .glass-modal {
+    @apply bg-jeopardy-deep/90 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl;
+  }
+}
+
+/* =============================================
+   GLOW EFFECT UTILITIES
+   ============================================= */
+@layer components {
+  .glow-blue {
+    box-shadow: 0 0 15px rgba(59, 59, 255, 0.4),
+                0 0 30px rgba(59, 59, 255, 0.2),
+                inset 0 0 15px rgba(59, 59, 255, 0.1);
+  }
+  .glow-gold {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4),
+                0 0 30px rgba(245, 158, 11, 0.2);
+  }
+  .glow-neon {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.4),
+                0 0 25px rgba(0, 212, 255, 0.2);
+  }
+  .glow-hover {
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  .glow-hover:hover {
+    box-shadow: 0 0 20px rgba(59, 59, 255, 0.5),
+                0 0 40px rgba(59, 59, 255, 0.3);
+    transform: translateY(-1px);
+  }
+}
+
+/* =============================================
+   BOARD GRID RESPONSIVE STYLES
+   ============================================= */
+@layer components {
+  .board-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(130px, 1fr));
+    gap: 4px;
+    min-width: 910px;
+  }
+
+  @media (min-width: 1024px) {
+    .board-grid {
+      min-width: auto;
+      gap: 6px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .board-grid {
+      gap: 8px;
+    }
+  }
+
+  /* Board cell base style */
+  .board-cell {
+    @apply relative flex items-center justify-center text-center rounded-lg
+           transition-all duration-300 ease-out cursor-pointer select-none;
+    aspect-ratio: 1.2 / 1;
+    min-height: 70px;
+  }
+
+  @media (min-width: 768px) {
+    .board-cell {
+      min-height: 85px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .board-cell {
+      min-height: 100px;
+    }
+  }
+}
+
+/* =============================================
+   GRADIENT TEXT UTILITY
+   ============================================= */
+@layer utilities {
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+  }
+  .text-gradient-blue {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #3b3bff, #00d4ff);
+  }
+  .text-gradient-premium {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #fbbf24, #ec4899, #a855f7);
+  }
+}
+
+/* =============================================
+   ANIMATED BACKGROUND ORBS
+   ============================================= */
+@layer components {
+  .bg-orb {
+    @apply absolute rounded-full opacity-20 blur-3xl pointer-events-none;
+    animation: orbFloat 20s ease-in-out infinite;
+  }
+  .bg-orb-1 {
+    @apply w-96 h-96 bg-jeopardy-royal;
+    animation-delay: 0s;
+    top: -10%;
+    left: -5%;
+  }
+  .bg-orb-2 {
+    @apply w-80 h-80 bg-neon-purple;
+    animation-delay: -7s;
+    top: 50%;
+    right: -10%;
+  }
+  .bg-orb-3 {
+    @apply w-72 h-72 bg-neon-blue;
+    animation-delay: -14s;
+    bottom: -5%;
+    left: 30%;
+  }
+}
+
+/* =============================================
+   CUSTOM ANIMATION UTILITIES
+   ============================================= */
+@layer utilities {
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  .animation-delay-700 { animation-delay: 700ms; }
+  .animation-delay-1000 { animation-delay: 1000ms; }
+}
+
+/* =============================================
+   BUTTON STYLES
+   ============================================= */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-semibold text-sm
+           bg-gradient-to-r from-jeopardy-royal to-jeopardy-bright
+           hover:from-jeopardy-bright hover:to-neon-blue
+           text-white shadow-glow-sm hover:shadow-glow-md
+           transition-all duration-300 ease-out
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-gold {
+    @apply px-6 py-3 rounded-xl font-semibold text-sm
+           bg-gradient-to-r from-gold-500 to-gold-600
+           hover:from-gold-400 hover:to-gold-500
+           text-jeopardy-navy shadow-glow-gold
+           transition-all duration-300 ease-out
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply px-4 py-2 rounded-lg font-medium text-sm
+           bg-white/5 hover:bg-white/10 border border-white/10
+           text-white/80 hover:text-white
+           transition-all duration-200 ease-out
+           active:scale-95;
+  }
+}
+
+/* =============================================
+   INPUT STYLES
+   ============================================= */
+@layer components {
+  .input-dark {
+    @apply w-full px-4 py-3 rounded-xl
+           bg-white/5 border border-white/10
+           text-white placeholder-white/30
+           focus:outline-none focus:border-neon-blue/50 focus:ring-1 focus:ring-neon-blue/30
+           transition-all duration-200;
+  }
+  .textarea-dark {
+    @apply w-full px-4 py-3 rounded-xl
+           bg-white/5 border border-white/10
+           text-white placeholder-white/30
+           focus:outline-none focus:border-neon-blue/50 focus:ring-1 focus:ring-neon-blue/30
+           transition-all duration-200 resize-none;
+  }
+}
