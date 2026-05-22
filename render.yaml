@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: jeopardy-backend
+    runtime: node
+    region: ohio
+    rootDir: packages/backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
