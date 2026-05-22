@@ -1,5 +1,5 @@
-﻿// =============================================
-// QuestionModal – full-screen question display in play mode
+// =============================================
+// QuestionModal � full-screen question display in play mode
 // =============================================
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -156,7 +156,7 @@ export default function QuestionModal({
                       }}
                     >
                       <p className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-2">
-                        Cevap
+                        Answer
                       </p>
                       <p className="text-xl sm:text-2xl md:text-3xl font-bold
                                     text-gold-300 leading-relaxed">

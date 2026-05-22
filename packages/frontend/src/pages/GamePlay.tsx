@@ -1,5 +1,5 @@
-ï»¿// =============================================
-// GamePlay â€“ play mode page with scoring, timer, and modals
+// =============================================
+// GamePlay – play mode page with scoring, timer, and modals
 // =============================================
 import { useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
@@ -35,7 +35,7 @@ export default function GamePlay() {
   // Sidebar toggle for mobile
   const [showSidebar, setShowSidebar] = useState(false);
 
-  // â”€â”€â”€ Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ¦¦¦ Handlers ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
 
   /** Open question modal when a cell is clicked */
   const handleCellClick = useCallback((question: Question) => {
@@ -51,7 +51,7 @@ export default function GamePlay() {
         emitRevealQuestion(questionId, gameId);
         // Also update via API for persistence
         api.updateQuestion(questionId, { isRevealed: true }).catch(() => {
-          // Silent fail â€“ socket event already handled it
+          // Silent fail – socket event already handled it
         });
       }
     },
@@ -68,13 +68,13 @@ export default function GamePlay() {
       emitScoreUpdate(teamId, newScore);
 
       api.updateTeamScore(teamId, newScore).catch(() => {
-        toast.error('Puan gÃ¼ncellenemedi');
+        toast.error('Failed to update score');
       });
 
       toast.success(
-        `${team.name}: ${points > 0 ? '+' : ''}${points} puan`,
+        `${team.name}: ${points > 0 ? '+' : ''}${points} pts`,
         {
-          icon: points > 0 ? 'ðŸŽ‰' : 'ðŸ˜”',
+          icon: points > 0 ? '??' : '??',
           style: {
             background: '#181842',
             color: '#fff',
@@ -93,7 +93,7 @@ export default function GamePlay() {
       try {
         await api.addTeam(gameId, { name, color });
         refetch();
-        toast.success(`${name} takÄ±mÄ± eklendi!`);
+        toast.success(`${name} team added!`);
       } catch {
         toast.error('Failed to add team');
       }
@@ -109,7 +109,7 @@ export default function GamePlay() {
         refetch();
         toast.success('Team deleted');
       } catch {
-        toast.error('TakÄ±m silinemedi');
+        toast.error('Failed to delete team');
       }
     },
     [refetch]
@@ -120,7 +120,7 @@ export default function GamePlay() {
     (teamId: string, newScore: number) => {
       emitScoreUpdate(teamId, newScore);
       api.updateTeamScore(teamId, newScore).catch(() => {
-        toast.error('Puan gÃ¼ncellenemedi');
+        toast.error('Failed to update score');
       });
     },
     [emitScoreUpdate]
@@ -133,13 +133,13 @@ export default function GamePlay() {
       try {
         await api.updateGame(gameId, { mode });
       } catch {
-        toast.error('Mod deÄŸiÅŸtirilemedi');
+        toast.error('Mod deðiþtirilemedi');
       }
     },
     [gameId]
   );
 
-  // â”€â”€â”€ Loading & Error States â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ¦¦¦ Loading & Error States ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
 
   if (loading) {
     return (
@@ -150,7 +150,7 @@ export default function GamePlay() {
           className="flex flex-col items-center gap-4"
         >
           <Loader2 className="w-8 h-8 text-neon-blue animate-spin" />
-          <p className="text-sm text-white/40">Oyun yÃ¼kleniyor...</p>
+          <p className="text-sm text-white/40">Loading game...</p>
         </motion.div>
       </div>
     );
@@ -164,15 +164,15 @@ export default function GamePlay() {
           animate={{ opacity: 1, y: 0 }}
           className="glass-card p-8 text-center max-w-md"
         >
-          <p className="text-4xl mb-4">ðŸ˜•</p>
+          <p className="text-4xl mb-4">??</p>
           <h2 className="text-lg font-bold text-white mb-2">
-            Oyun BulunamadÄ±
+            Game Not Found
           </h2>
           <p className="text-sm text-white/40 mb-4">
-            {error || 'Bu oyun mevcut deÄŸil veya silinmiÅŸ olabilir.'}
+            {error || 'This game does not exist or may have been deleted.'}
           </p>
           <a href="/" className="btn-primary inline-block">
-            Ana Sayfaya DÃ¶n
+            Ana Sayfaya Dön
           </a>
         </motion.div>
       </div>
@@ -234,7 +234,7 @@ export default function GamePlay() {
             className="lg:hidden w-full btn-ghost text-xs flex items-center
                        justify-center gap-2"
           >
-            {showSidebar ? 'Paneli Gizle' : 'Teams & ZamanlayÄ±cÄ±'}
+            {showSidebar ? 'Paneli Gizle' : 'Teams & Zamanlayýcý'}
           </button>
 
           <div

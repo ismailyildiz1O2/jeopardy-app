@@ -1,5 +1,5 @@
-ï»¿// =============================================
-// EditPanel â€“ side panel / modal for editing a question
+// =============================================
+// EditPanel – side panel / modal for editing a question
 // =============================================
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -191,7 +191,7 @@ export default function EditPanel({
               <div>
                 <label className="block text-xs font-semibold uppercase
                                   tracking-wider text-white/40 mb-2">
-                  Soru
+                  Question
                 </label>
                 <textarea
                   value={questionText}
@@ -210,7 +210,7 @@ export default function EditPanel({
               <div>
                 <label className="block text-xs font-semibold uppercase
                                   tracking-wider text-white/40 mb-2">
-                  Cevap
+                  Answer
                 </label>
                 <textarea
                   value={answerText}
@@ -241,7 +241,7 @@ export default function EditPanel({
                         : 'bg-white/5 text-white/40 border border-white/5'
                     }`}
                   >
-                    GÃ¶rsel
+                    Görsel
                   </button>
                   <button
                     onClick={() => handleMediaTypeChange('video')}
@@ -282,7 +282,7 @@ export default function EditPanel({
                   <div className="mt-3 rounded-lg overflow-hidden border border-white/10">
                     <img
                       src={mediaUrl}
-                      alt="Ã–nizleme"
+                      alt="Önizleme"
                       className="w-full h-40 object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';

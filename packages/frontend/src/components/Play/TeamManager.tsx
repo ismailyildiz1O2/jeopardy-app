@@ -1,5 +1,5 @@
-ï»¿// =============================================
-// TeamManager â€“ add, remove, reorder teams and adjust scores
+// =============================================
+// TeamManager – add, remove, reorder teams and adjust scores
 // =============================================
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -187,7 +187,7 @@ export default function TeamManager({
                   </p>
                   <p className={`text-sm font-bold tabular-nums
                     ${team.score >= 0 ? 'text-gold-400' : 'text-neon-red'}`}>
-                    {team.score.toLocaleString()} puan
+                    {team.score.toLocaleString()} pts
                   </p>
                 </div>
 
@@ -226,7 +226,7 @@ export default function TeamManager({
                       }))
                     }
                     onKeyDown={(e) => e.key === 'Enter' && handleCustomScore(team)}
-                    placeholder="Â±"
+                    placeholder="±"
                     className="w-14 px-1.5 py-0.5 rounded bg-white/5 border border-white/10
                                text-white text-xs text-center focus:outline-none
                                focus:border-neon-blue/30"

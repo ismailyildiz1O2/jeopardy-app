@@ -1,5 +1,5 @@
-ï»¿// =============================================
-// AnswerReveal â€“ flip card animation for Q&A display
+// =============================================
+// AnswerReveal – flip card animation for Q&A display
 // =============================================
 import { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -40,7 +40,7 @@ export default function AnswerReveal({
           }}
         >
           <p className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-1">
-            Question â€¢ {points} Points
+            Question • {points} Points
           </p>
           <p className="text-lg sm:text-xl font-bold text-white leading-relaxed">
             {questionText || (
@@ -49,7 +49,7 @@ export default function AnswerReveal({
           </p>
           <p className="mt-4 text-[10px] text-white/20 flex items-center gap-1">
             <RotateCw className="w-3 h-3" />
-            Ã‡evirmek iÃ§in tÄ±klayÄ±n
+            Çevirmek için týklayýn
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export default function AnswerReveal({
           }}
         >
           <p className="text-xs font-semibold uppercase tracking-wider text-gold-400/60 mb-1">
-            Cevap
+            Answer
           </p>
           <p className="text-lg sm:text-xl font-bold text-gold-300 leading-relaxed">
             {answerText || (
