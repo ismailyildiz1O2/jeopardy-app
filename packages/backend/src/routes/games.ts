@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
 import { eq } from "drizzle-orm";
-import { nanoid } from "nanoid";
+import { customAlphabet } from "nanoid";
 import { db } from "../db/index.js";
 import {
   games,
@@ -30,7 +30,8 @@ const POINTS_PER_ROW = [100, 200, 300, 400, 500, 600, 700];
 // Creates a new game with 7 categories, 42 questions, and a game_state record.
 router.post("/", async (_req: Request, res: Response) => {
   try {
-    const shareCode = nanoid(6);
+    const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6);
+    const shareCode = nanoid();
 
     // 1. Create the game
     const [game] = await db
