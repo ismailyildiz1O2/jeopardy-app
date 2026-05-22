@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // EditPanel – side panel / modal for editing a question
 // =============================================
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -180,7 +180,7 @@ export default function EditPanel({
                               border border-neon-orange/20 flex items-center gap-2">
                 <Lock className="w-4 h-4 text-neon-orange flex-shrink-0" />
                 <p className="text-xs text-neon-orange">
-                  Bu soru başka biri tarafından düzenleniyor.
+                  This question is being edited by someone else.
                 </p>
               </div>
             )}
@@ -197,7 +197,7 @@ export default function EditPanel({
                   value={questionText}
                   onChange={(e) => handleQuestionChange(e.target.value)}
                   disabled={isLockedByOther}
-                  placeholder="Soruyu buraya yazın..."
+                  placeholder="Type your question here..."
                   rows={4}
                   className="textarea-dark"
                 />
@@ -216,7 +216,7 @@ export default function EditPanel({
                   value={answerText}
                   onChange={(e) => handleAnswerChange(e.target.value)}
                   disabled={isLockedByOther}
-                  placeholder="Cevabı buraya yazın..."
+                  placeholder="Type your answer here..."
                   rows={3}
                   className="textarea-dark"
                 />
@@ -227,7 +227,7 @@ export default function EditPanel({
                 <label className="block text-xs font-semibold uppercase
                                   tracking-wider text-white/40 mb-2">
                   <Image className="w-3 h-3 inline mr-1" />
-                  Medya (İsteğe bağlı)
+                  Media (Optional)
                 </label>
 
                 {/* Media type toggle */}
@@ -301,7 +301,7 @@ export default function EditPanel({
                 Otomatik kaydedilir
               </p>
               <button onClick={handleClose} className="btn-ghost">
-                Kapat
+                Close
               </button>
             </div>
           </motion.div>

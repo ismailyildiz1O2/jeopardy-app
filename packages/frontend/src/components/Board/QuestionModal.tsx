@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // QuestionModal – full-screen question display in play mode
 // =============================================
 import { useState, useCallback } from 'react';
@@ -181,7 +181,7 @@ export default function QuestionModal({
                   className="mt-8 btn-gold flex items-center gap-2 text-base"
                 >
                   <Eye className="w-5 h-5" />
-                  Cevabı Göster
+                  Show Answer
                 </motion.button>
               )}
             </div>
@@ -253,7 +253,7 @@ export default function QuestionModal({
             {showAnswer && (
               <div className="px-4 sm:px-6 py-3 border-t border-white/5 flex justify-center">
                 <button onClick={handleClose} className="btn-ghost">
-                  Kapat
+                  Close
                 </button>
               </div>
             )}

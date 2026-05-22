@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // Timer – circular countdown timer for play mode
 // =============================================
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -133,7 +133,7 @@ export default function Timer({
             {timeLeft}
           </span>
           <span className="text-[9px] text-white/30 uppercase tracking-wider">
-            saniye
+            seconds
           </span>
         </div>
 
@@ -157,7 +157,7 @@ export default function Timer({
             onClick={handleStart}
             className="p-2.5 rounded-full bg-neon-green/10 hover:bg-neon-green/20
                        text-neon-green transition-all hover:scale-105 active:scale-95"
-            title="Başlat"
+            title="Start"
           >
             <Play className="w-4 h-4" />
           </button>
@@ -188,7 +188,7 @@ export default function Timer({
           animate={{ opacity: 1, scale: 1 }}
           className="text-xs font-bold text-neon-red uppercase tracking-wider"
         >
-          ⏰ Süre Doldu!
+          ⏰ Time is up!
         </motion.p>
       )}
     </div>

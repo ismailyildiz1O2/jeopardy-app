@@ -46,7 +46,7 @@ export default function GameEditor() {
         await api.updateCategory(categoryId, { name });
         emitCategoryUpdate(categoryId, { name });
       } catch {
-        toast.error('Kategori güncellenemedi');
+        toast.error('Failed to update category');
       }
     },
     [emitCategoryUpdate]
@@ -59,7 +59,7 @@ export default function GameEditor() {
         await api.updateQuestion(questionId, data);
         emitQuestionUpdate(questionId, data);
       } catch {
-        toast.error('Soru güncellenemedi');
+        toast.error('Failed to update question');
       }
     },
     [emitQuestionUpdate]
@@ -92,7 +92,7 @@ export default function GameEditor() {
       try {
         await api.updateGame(gameId, { mode });
       } catch {
-        toast.error('Mod değiştirilemedi');
+        toast.error('Failed to change mode');
       }
     },
     [gameId]
@@ -104,9 +104,9 @@ export default function GameEditor() {
       if (!gameId) return;
       try {
         await api.updateGame(gameId, { title });
-        toast.success('Başlık güncellendi');
+        toast.success('Title updated');
       } catch {
-        toast.error('Başlık güncellenemedi');
+        toast.error('Failed to update title');
       }
     },
     [gameId]
@@ -123,7 +123,7 @@ export default function GameEditor() {
           className="flex flex-col items-center gap-4"
         >
           <Loader2 className="w-8 h-8 text-neon-blue animate-spin" />
-          <p className="text-sm text-white/40">Oyun yükleniyor...</p>
+          <p className="text-sm text-white/40">Loading game...</p>
         </motion.div>
       </div>
     );
@@ -139,13 +139,13 @@ export default function GameEditor() {
         >
           <p className="text-4xl mb-4">😕</p>
           <h2 className="text-lg font-bold text-white mb-2">
-            Oyun Bulunamadı
+            Game Not Found
           </h2>
           <p className="text-sm text-white/40 mb-4">
-            {error || 'Bu oyun mevcut değil veya silinmiş olabilir.'}
+            {error || 'This game does not exist or has been deleted.'}
           </p>
           <a href="/" className="btn-primary inline-block">
-            Ana Sayfaya Dön
+            Go Home
           </a>
         </motion.div>
       </div>

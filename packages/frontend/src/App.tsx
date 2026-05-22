@@ -85,13 +85,13 @@ export default function App() {
               <div className="text-center">
                 <p className="text-6xl mb-4">🔍</p>
                 <h1 className="text-2xl font-bold text-white mb-2">
-                  Sayfa Bulunamadı
+                  Page Not Found
                 </h1>
                 <p className="text-sm text-white/40 mb-6">
-                  Aradığınız sayfa mevcut değil.
+                  The page you're looking for doesn't exist.
                 </p>
                 <a href="/" className="btn-primary">
-                  Ana Sayfaya Dön
+                  Go Home
                 </a>
               </div>
             </div>

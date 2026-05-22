@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // TeamManager – add, remove, reorder teams and adjust scores
 // =============================================
 import { useState, useCallback } from 'react';
@@ -76,14 +76,14 @@ export default function TeamManager({
         <h3 className="text-sm font-bold text-white/70 uppercase tracking-wider
                         flex items-center gap-2">
           <Users className="w-4 h-4" />
-          Takımlar
+          Teams
         </h3>
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
             className="p-1.5 rounded-lg bg-neon-green/10 hover:bg-neon-green/20
                        text-neon-green transition-colors"
-            title="Takım ekle"
+            title="Add team"
           >
             <UserPlus className="w-4 h-4" />
           </button>
@@ -105,7 +105,7 @@ export default function TeamManager({
                 value={newTeamName}
                 onChange={(e) => setNewTeamName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
-                placeholder="Takım adı..."
+                placeholder="Team name..."
                 className="input-dark text-sm"
                 autoFocus
                 maxLength={20}
@@ -141,7 +141,7 @@ export default function TeamManager({
                   disabled={!newTeamName.trim()}
                   className="btn-primary flex-1 text-xs py-2"
                 >
-                  Ekle
+                  Add
                 </button>
                 <button
                   onClick={() => {
@@ -150,7 +150,7 @@ export default function TeamManager({
                   }}
                   className="btn-ghost text-xs py-2"
                 >
-                  İptal
+                  Cancel
                 </button>
               </div>
             </div>
@@ -246,7 +246,7 @@ export default function TeamManager({
                   className="p-1 rounded bg-neon-red/10 hover:bg-neon-red/20
                              text-neon-red transition-colors opacity-0
                              group-hover:opacity-100"
-                  title="Takımı sil"
+                  title="Delete team"
                 >
                   <Trash2 className="w-3 h-3" />
                 </button>
@@ -256,7 +256,7 @@ export default function TeamManager({
 
         {teams.length === 0 && (
           <p className="text-center text-xs text-white/20 py-4">
-            Henüz takım eklenmedi
+            No teams added yet
           </p>
         )}
       </div>

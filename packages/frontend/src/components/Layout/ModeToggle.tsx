@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // ModeToggle – animated edit/play mode switch
 // =============================================
 import { useState } from 'react';
@@ -76,7 +76,7 @@ export default function ModeToggle({ mode, onModeChange }: ModeToggleProps) {
             ${mode === 'edit' ? 'text-neon-blue' : 'text-neon-green'}
           `}
         >
-          {mode === 'edit' ? 'Düzenle' : 'Oynat'}
+          {mode === 'edit' ? 'Edit' : 'Play'}
         </span>
       </button>
 
@@ -106,13 +106,13 @@ export default function ModeToggle({ mode, onModeChange }: ModeToggleProps) {
                   <AlertTriangle className="w-5 h-5 text-gold-400" />
                 </div>
                 <h3 className="text-base font-bold text-white">
-                  Oyun Moduna Geç
+                  Play Modena Geç
                 </h3>
               </div>
 
               <p className="text-sm text-white/60 mb-6">
-                Oyun moduna geçmek istediğinize emin misiniz?
-                Sorular kilitlenecek ve takımlarla oynayabileceksiniz.
+                Are you sure you want to switch to play mode?
+                Questions will be locked and you can play with teams.
               </p>
 
               <div className="flex gap-3">
@@ -120,14 +120,14 @@ export default function ModeToggle({ mode, onModeChange }: ModeToggleProps) {
                   onClick={handleCancel}
                   className="btn-ghost flex-1"
                 >
-                  İptal
+                  Cancel
                 </button>
                 <button
                   onClick={handleConfirm}
                   className="btn-primary flex-1 flex items-center justify-center gap-2"
                 >
                   <Play className="w-4 h-4" />
-                  Başlat
+                  Start
                 </button>
               </div>
             </motion.div>

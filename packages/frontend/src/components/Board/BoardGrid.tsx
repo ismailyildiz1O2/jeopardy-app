@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // BoardGrid – the main 7×7 Jeopardy game board
 // =============================================
 import { useMemo, useCallback } from 'react';
@@ -99,7 +99,7 @@ export default function BoardGrid({
       {/* Mobile scroll hint */}
       <div className="flex justify-center mt-2 lg:hidden">
         <p className="text-[10px] text-white/20 flex items-center gap-1">
-          <span>←</span> Kaydırarak tüm kategorileri görün <span>→</span>
+          <span>←</span> Scroll to see all categories <span>→</span>
         </p>
       </div>
     </div>

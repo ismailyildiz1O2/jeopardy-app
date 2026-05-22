@@ -41,7 +41,7 @@ router.post("/", async (_req: Request, res: Response) => {
     // 2. Create 7 default categories
     const categoryValues = Array.from({ length: 7 }, (_, i) => ({
       gameId: game.id,
-      name: `Kategori ${i + 1}`,
+      name: `Category ${i + 1}`,
       position: i,
       color: DEFAULT_COLORS[i],
     }));

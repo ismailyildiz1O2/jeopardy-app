@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // CellEditor – lightweight inline editor for quick edits
 // =============================================
 import React, { useState, useRef, useEffect } from 'react';
@@ -22,7 +22,7 @@ interface CellEditorProps {
 
 export default function CellEditor({
   value: initialValue,
-  placeholder = 'Metin girin...',
+  placeholder = 'Enter text...',
   isOpen,
   onSave,
   onClose,
@@ -80,7 +80,7 @@ export default function CellEditor({
         >
           <div className="flex items-start justify-between gap-1 mb-1">
             <span className="text-[9px] text-white/30 uppercase tracking-wider">
-              Düzenle
+              Edit
             </span>
             <button
               onClick={onClose}
@@ -109,7 +109,7 @@ export default function CellEditor({
               {value.length}/{maxLength}
             </span>
             <span className="text-[8px] text-white/20">
-              Enter = kaydet
+              Enter = save
             </span>
           </div>
         </motion.div>

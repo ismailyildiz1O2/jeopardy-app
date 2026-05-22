@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // GamePlay – play mode page with scoring, timer, and modals
 // =============================================
 import { useState, useCallback } from 'react';
@@ -95,7 +95,7 @@ export default function GamePlay() {
         refetch();
         toast.success(`${name} takımı eklendi!`);
       } catch {
-        toast.error('Takım eklenemedi');
+        toast.error('Failed to add team');
       }
     },
     [gameId, refetch]
@@ -107,7 +107,7 @@ export default function GamePlay() {
       try {
         await api.deleteTeam(teamId);
         refetch();
-        toast.success('Takım silindi');
+        toast.success('Team deleted');
       } catch {
         toast.error('Takım silinemedi');
       }
@@ -234,7 +234,7 @@ export default function GamePlay() {
             className="lg:hidden w-full btn-ghost text-xs flex items-center
                        justify-center gap-2"
           >
-            {showSidebar ? 'Paneli Gizle' : 'Takımlar & Zamanlayıcı'}
+            {showSidebar ? 'Paneli Gizle' : 'Teams & Zamanlayıcı'}
           </button>
 
           <div

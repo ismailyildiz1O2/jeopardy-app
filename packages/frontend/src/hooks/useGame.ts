@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // useGame – fetches game data and manages lifecycle
 // =============================================
 import { useEffect, useCallback, useState } from 'react';
@@ -55,7 +55,7 @@ export function useGame({ gameId, shareCode }: UseGameOptions): UseGameReturn {
       joinGame(data.game.id);
     } catch (err) {
       const message =
-        err instanceof Error ? err.message : 'Oyun yüklenemedi';
+        err instanceof Error ? err.message : 'Failed to load game';
       dispatch({ type: 'SET_ERROR', payload: message });
     } finally {
       setLocalLoading(false);
