@@ -13,10 +13,10 @@ import { relations } from "drizzle-orm";
 // ─── Games Table ─────────────────────────────────────────────────────────────
 export const games = pgTable("games", {
   id: uuid("id").primaryKey().defaultRandom(),
-  title: varchar("title", { length: 255 }).notNull().default("Yeni Oyun"),
+  title: varchar("title", { length: 255 }).notNull().default("New Game"),
   shareCode: varchar("share_code", { length: 8 }).unique().notNull(),
   mode: varchar("mode", { length: 10 }).notNull().default("edit"),
-  gridRows: integer("grid_rows").default(6),
+  gridRows: integer("grid_rows").default(7),
   gridCols: integer("grid_cols").default(7),
   settings: jsonb("settings").default({}),
   createdAt: timestamp("created_at").defaultNow(),
@@ -29,7 +29,7 @@ export const categories = pgTable("categories", {
   gameId: uuid("game_id")
     .notNull()
     .references(() => games.id, { onDelete: "cascade" }),
-  name: varchar("name", { length: 255 }).notNull().default("Kategori"),
+  name: varchar("name", { length: 255 }).notNull().default("Category"),
   position: integer("position").notNull(),
   color: varchar("color", { length: 7 }).default("#3B82F6"),
   createdAt: timestamp("created_at").defaultNow(),

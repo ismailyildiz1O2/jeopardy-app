@@ -24,7 +24,7 @@ const DEFAULT_COLORS = [
 ];
 
 // Fixed point values per row
-const POINTS_PER_ROW = [100, 200, 300, 400, 500, 600];
+const POINTS_PER_ROW = [100, 200, 300, 400, 500, 600, 700];
 
 // ─── POST /api/games ─────────────────────────────────────────────────────────
 // Creates a new game with 7 categories, 42 questions, and a game_state record.
