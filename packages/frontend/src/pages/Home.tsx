@@ -116,7 +116,7 @@ export default function Home() {
                   Create New Game
                 </h2>
                 <p className="text-xs text-white/40">
-                  7 categories, 42 questions — build your own game
+                  7 categories, 49 questions — build your own game
                 </p>
               </div>
               <motion.div
