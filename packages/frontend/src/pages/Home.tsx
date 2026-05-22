@@ -31,7 +31,7 @@ export default function Home() {
 
   /** Join a game by share code */
   const handleJoin = useCallback(async () => {
-    const code = shareCode.trim().toUpperCase();
+    const code = shareCode.trim();
     if (!code) {
       toast.error('Please enter a game code');
       return;
@@ -168,7 +168,7 @@ export default function Home() {
               <input
                 type="text"
                 value={shareCode}
-                onChange={(e) => setShareCode(e.target.value.toUpperCase())}
+                onChange={(e) => setShareCode(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleJoin()}
                 placeholder="Enter game code..."
                 maxLength={8}
