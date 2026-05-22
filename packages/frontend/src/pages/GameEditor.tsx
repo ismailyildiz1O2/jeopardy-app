@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import BoardGrid from '../components/Board/BoardGrid';
 import EditPanel from '../components/Edit/EditPanel';
 import Header from '../components/Layout/Header';
+import { useGameContext } from '../context/GameContext';
 import { useGame } from '../hooks/useGame';
 import { useSocket } from '../hooks/useSocket';
 import * as api from '../lib/api';
@@ -17,6 +18,7 @@ import type { Question, GameMode, UpdateQuestionPayload } from '../types';
 export default function GameEditor() {
   const { id: gameId } = useParams<{ id: string }>();
   const { game, loading, error } = useGame({ gameId });
+  const { dispatch } = useGameContext();
   const {
     socket,
     isConnected,
@@ -43,26 +45,28 @@ export default function GameEditor() {
   const handleCategoryUpdate = useCallback(
     async (categoryId: string, name: string) => {
       try {
-        await api.updateCategory(categoryId, { name });
+        const updatedCategory = await api.updateCategory(categoryId, { name });
+        dispatch({ type: 'UPDATE_CATEGORY', payload: updatedCategory });
         emitCategoryUpdate(categoryId, { name });
       } catch {
         toast.error('Failed to update category');
       }
     },
-    [emitCategoryUpdate]
+    [emitCategoryUpdate, dispatch]
   );
 
   /** Save question update via API and broadcast */
   const handleQuestionSave = useCallback(
     async (questionId: string, data: UpdateQuestionPayload) => {
       try {
-        await api.updateQuestion(questionId, data);
+        const updatedQuestion = await api.updateQuestion(questionId, data);
+        dispatch({ type: 'UPDATE_QUESTION', payload: updatedQuestion });
         emitQuestionUpdate(questionId, data);
       } catch {
         toast.error('Failed to update question');
       }
     },
-    [emitQuestionUpdate]
+    [emitQuestionUpdate, dispatch]
   );
 
   /** Lock a question for editing */
