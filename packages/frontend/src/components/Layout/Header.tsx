@@ -46,10 +46,10 @@ export default function Header({
     try {
       await navigator.clipboard.writeText(shareCode);
       setIsCopied(true);
-      toast.success('Kod kopyalandı!');
+      toast.success('Code copied!');
       setTimeout(() => setIsCopied(false), 2000);
     } catch {
-      toast.error('Kopyalanamadı');
+      toast.error('Failed to copy');
     }
   }
 
@@ -85,7 +85,7 @@ export default function Header({
             onClick={() => navigate('/')}
             className="p-2 rounded-lg bg-white/5 hover:bg-white/10
                        transition-colors flex-shrink-0"
-            title="Ana Sayfa"
+            title="Home"
           >
             <Home className="w-4 h-4 text-white/60" />
           </button>
@@ -130,7 +130,7 @@ export default function Header({
                        transition-all group"
           >
             <span className="text-[10px] text-white/30 uppercase tracking-wider">
-              Kod:
+              Code:
             </span>
             <span className="text-sm font-mono font-bold text-gold-400 tracking-widest">
               {shareCode}
@@ -166,7 +166,7 @@ export default function Header({
             onClick={handleCopyCode}
             className="sm:hidden p-2 rounded-lg bg-white/5 hover:bg-white/10
                        transition-colors"
-            title={`Kod: ${shareCode}`}
+            title={`Code: ${shareCode}`}
           >
             {isCopied ? (
               <Check className="w-4 h-4 text-neon-green" />
