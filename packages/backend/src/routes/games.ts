@@ -51,12 +51,12 @@ router.post("/", async (_req: Request, res: Response) => {
       .values(categoryValues)
       .returning();
 
-    // 3. Create 42 questions (7 categories × 6 rows)
+    // 3. Create 49 questions (7 categories × 7 rows)
     const questionValues = insertedCategories.flatMap((cat) =>
       POINTS_PER_ROW.map((points, rowIdx) => ({
         categoryId: cat.id,
         gameId: game.id,
-        rowIndex: rowIdx + 1,
+        rowIndex: rowIdx,
         points,
       }))
     );

@@ -17,7 +17,7 @@ export interface Game {
   title: string;
   shareCode: string;
   mode: GameMode;
-  gridRows: number;   // default 6 (point rows)
+  gridRows: number;   // default 7 (point rows)
   gridCols: number;   // default 7 (categories)
   settings: GameSettings;
   createdAt: string;
@@ -27,7 +27,7 @@ export interface Game {
 /** Configurable game settings */
 export interface GameSettings {
   timerSeconds: number;      // default 30
-  pointValues: number[];     // [100, 200, 300, 400, 500, 600]
+  pointValues: number[];     // [100, 200, 300, 400, 500, 600, 700]
   allowNegativeScores: boolean;
 }
 
