@@ -3,7 +3,7 @@ services:
     name: jeopardy-backend
     runtime: node
     region: ohio
-    buildCommand: npm install && cd packages/backend && npm run build
+    buildCommand: npm install --include=dev && cd packages/backend && npm run build
     startCommand: cd packages/backend && node dist/index.js
     envVars:
       - key: DATABASE_URL
