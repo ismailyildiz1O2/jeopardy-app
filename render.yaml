@@ -3,9 +3,8 @@ services:
     name: jeopardy-backend
     runtime: node
     region: ohio
-    rootDir: packages/backend
-    buildCommand: npm install && npm run build
-    startCommand: node dist/index.js
+    buildCommand: cd packages/backend && npm install && npm run build
+    startCommand: cd packages/backend && node dist/index.js
     envVars:
       - key: DATABASE_URL
         sync: false
@@ -13,5 +12,3 @@ services:
         sync: false
       - key: NODE_ENV
         value: production
-      - key: NODE_VERSION
-        value: 20.11.0
