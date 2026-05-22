@@ -73,7 +73,7 @@ router.post("/", async (_req: Request, res: Response) => {
       .returning();
 
     res.status(201).json({
-      ...game,
+      game,
       categories: insertedCategories,
       questions: insertedQuestions,
       teams: [],
@@ -110,7 +110,15 @@ router.get("/:id", async (req: Request, res: Response) => {
       return;
     }
 
-    res.json(game);
+    // Restructure to match FullGame type
+    const { categories: cats, questions: qs, teams: ts, gameState: gs, ...gameData } = game;
+    res.json({
+      game: gameData,
+      categories: cats,
+      questions: qs,
+      teams: ts,
+      gameState: gs,
+    });
   } catch (error) {
     console.error("Error fetching game:", error);
     res.status(500).json({ error: "Failed to fetch game" });
@@ -142,7 +150,14 @@ router.get("/code/:shareCode", async (req: Request, res: Response) => {
       return;
     }
 
-    res.json(game);
+    const { categories: cats, questions: qs, teams: ts, gameState: gs, ...gameData } = game;
+    res.json({
+      game: gameData,
+      categories: cats,
+      questions: qs,
+      teams: ts,
+      gameState: gs,
+    });
   } catch (error) {
     console.error("Error fetching game by code:", error);
     res.status(500).json({ error: "Failed to fetch game" });
