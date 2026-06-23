@@ -1,21 +1,25 @@
-﻿// =============================================
+// =============================================
 // ModeToggle – animated edit/play mode switch
 // =============================================
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Pencil, Play, AlertTriangle } from 'lucide-react';
 import type { GameMode } from '../../types';
+import PasswordPromptModal from './PasswordPromptModal';
+import * as api from '../../lib/api';
 
 interface ModeToggleProps {
   mode: GameMode;
   onModeChange: (mode: GameMode) => void;
+  gameId: string;
 }
 
-export default function ModeToggle({ mode, onModeChange }: ModeToggleProps) {
+export default function ModeToggle({ mode, onModeChange, gameId }: ModeToggleProps) {
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
   const [pendingMode, setPendingMode] = useState<GameMode | null>(null);
 
-  function handleToggle() {
+  async function handleToggle() {
     const newMode = mode === 'edit' ? 'play' : 'edit';
 
     // Show confirmation when switching to play mode
@@ -23,7 +27,30 @@ export default function ModeToggle({ mode, onModeChange }: ModeToggleProps) {
       setPendingMode(newMode);
       setShowConfirm(true);
     } else {
-      onModeChange(newMode);
+      // Switching to edit mode
+      // Check if we need a password
+      const isAuthed = sessionStorage.getItem(`jeopardy_auth_${gameId}`);
+      if (!isAuthed) {
+        try {
+          // Verify if there's even a password required (by attempting with empty password)
+          // Wait, we need the game data to know if it has a password. 
+          // Let's just try to fetch game data or assume we have it. 
+          // Actually, if we just try an empty password and it fails, it means there's a password!
+          const { success } = await api.verifyPassword(gameId, '');
+          if (success) {
+            onModeChange(newMode);
+          } else {
+            setPendingMode(newMode);
+            setShowPasswordPrompt(true);
+          }
+        } catch {
+           // fallback just prompt
+           setPendingMode(newMode);
+           setShowPasswordPrompt(true);
+        }
+      } else {
+        onModeChange(newMode);
+      }
     }
   }
 
@@ -132,6 +159,24 @@ export default function ModeToggle({ mode, onModeChange }: ModeToggleProps) {
               </div>
             </motion.div>
           </>
+        )}
+
+        {showPasswordPrompt && (
+          <PasswordPromptModal
+            isOpen={showPasswordPrompt}
+            onClose={() => {
+              setShowPasswordPrompt(false);
+              setPendingMode(null);
+            }}
+            gameId={gameId}
+            onSuccess={() => {
+              setShowPasswordPrompt(false);
+              if (pendingMode) {
+                onModeChange(pendingMode);
+              }
+              setPendingMode(null);
+            }}
+          />
         )}
       </AnimatePresence>
     </>

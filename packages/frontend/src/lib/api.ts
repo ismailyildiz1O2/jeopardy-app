@@ -14,6 +14,10 @@ import type {
   Game,
 } from '../types';
 
+export interface VerifyPasswordResponse {
+  success: boolean;
+}
+
 /**
  * Base URL for API requests.
  * In development, Vite proxy forwards /api to localhost:3001.
@@ -88,6 +92,14 @@ export function updateGame(
 export function deleteGame(id: string): Promise<void> {
   return request<void>(`/api/games/${id}`, {
     method: 'DELETE',
+  });
+}
+
+/** Verify edit password for a game */
+export function verifyPassword(id: string, password: string): Promise<VerifyPasswordResponse> {
+  return request<VerifyPasswordResponse>(`/api/games/${id}/verify-password`, {
+    method: 'POST',
+    body: JSON.stringify({ password }),
   });
 }
 

@@ -20,6 +20,7 @@ export interface Game {
   gridRows: number;   // default 7 (point rows)
   gridCols: number;   // default 7 (categories)
   settings: GameSettings;
+  isPublic?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -78,7 +79,7 @@ export interface GameState {
 
 /** Complete game data – everything needed to render the board */
 export interface FullGame {
-  game: Game;
+  game: Game & { hasPassword?: boolean };
   categories: Category[];
   questions: Question[];
   teams: Team[];
@@ -95,6 +96,8 @@ export interface UpdateGamePayload {
   title?: string;
   mode?: GameMode;
   settings?: Partial<GameSettings>;
+  isPublic?: boolean;
+  editPassword?: string;
 }
 
 /** Payload for updating a category */

@@ -1,8 +1,8 @@
 // =============================================
 // GameEditor – edit mode page for creating game content
 // =============================================
-import { useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useCallback, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -17,6 +17,7 @@ import type { Question, GameMode, UpdateQuestionPayload } from '../types';
 
 export default function GameEditor() {
   const { id: gameId } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { game, loading, error } = useGame({ gameId });
   const { dispatch } = useGameContext();
   const {
@@ -32,6 +33,17 @@ export default function GameEditor() {
   // Edit panel state
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
   const [isEditPanelOpen, setIsEditPanelOpen] = useState(false);
+
+  // Auth check for edit mode
+  useEffect(() => {
+    if (game && game.game.hasPassword) {
+      const isAuthed = sessionStorage.getItem(`jeopardy_auth_${gameId}`);
+      if (!isAuthed) {
+        toast.error('Password required to edit. Redirected to play mode.');
+        navigate(`/game/${gameId}/play`);
+      }
+    }
+  }, [game, gameId, navigate]);
 
   // ─── Handlers ────────────────────────────────────────
 
@@ -177,6 +189,7 @@ export default function GameEditor() {
         onlineCount={onlineCount}
         onModeChange={handleModeChange}
         onTitleChange={handleTitleChange}
+        isPublic={game.game.isPublic}
       />
 
       {/* Board */}

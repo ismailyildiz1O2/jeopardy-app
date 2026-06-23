@@ -111,10 +111,10 @@ router.get("/:id", async (req: Request, res: Response) => {
       return;
     }
 
-    // Restructure to match FullGame type
-    const { categories: cats, questions: qs, teams: ts, gameState: gs, ...gameData } = game;
+    // Restructure to match FullGame type and omit sensitive fields
+    const { categories: cats, questions: qs, teams: ts, gameState: gs, editPassword, ...gameData } = game;
     res.json({
-      game: gameData,
+      game: { ...gameData, hasPassword: !!editPassword },
       categories: cats,
       questions: qs,
       teams: ts,
@@ -151,9 +151,9 @@ router.get("/code/:shareCode", async (req: Request, res: Response) => {
       return;
     }
 
-    const { categories: cats, questions: qs, teams: ts, gameState: gs, ...gameData } = game;
+    const { categories: cats, questions: qs, teams: ts, gameState: gs, editPassword, ...gameData } = game;
     res.json({
-      game: gameData,
+      game: { ...gameData, hasPassword: !!editPassword },
       categories: cats,
       questions: qs,
       teams: ts,
@@ -170,12 +170,14 @@ router.get("/code/:shareCode", async (req: Request, res: Response) => {
 router.put("/:id", async (req: Request, res: Response) => {
   try {
     const id = req.params.id as string;
-    const { title, mode, settings } = req.body;
+    const { title, mode, settings, isPublic, editPassword } = req.body;
 
     const updateData: Record<string, unknown> = { updatedAt: new Date() };
     if (title !== undefined) updateData.title = title;
     if (mode !== undefined) updateData.mode = mode;
     if (settings !== undefined) updateData.settings = settings;
+    if (isPublic !== undefined) updateData.isPublic = isPublic;
+    if (editPassword !== undefined) updateData.editPassword = editPassword;
 
     const [updated] = await db
       .update(games)
@@ -192,6 +194,38 @@ router.put("/:id", async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error updating game:", error);
     res.status(500).json({ error: "Failed to update game" });
+  }
+});
+
+// ─── POST /api/games/:id/verify-password ─────────────────────────────────────
+// Verifies if the provided password matches the game's edit password
+router.post("/:id/verify-password", async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id as string;
+    const { password } = req.body;
+
+    const game = await db.query.games.findFirst({
+      where: eq(games.id, id),
+    });
+
+    if (!game) {
+      res.status(404).json({ error: "Game not found" });
+      return;
+    }
+
+    if (!game.editPassword) {
+      res.json({ success: true });
+      return;
+    }
+
+    if (game.editPassword === password) {
+      res.json({ success: true });
+    } else {
+      res.json({ success: false });
+    }
+  } catch (error) {
+    console.error("Error verifying password:", error);
+    res.status(500).json({ error: "Failed to verify password" });
   }
 });
 

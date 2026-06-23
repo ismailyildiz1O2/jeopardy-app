@@ -19,6 +19,8 @@ export const games = pgTable("games", {
   gridRows: integer("grid_rows").default(7),
   gridCols: integer("grid_cols").default(7),
   settings: jsonb("settings").default({}),
+  isPublic: boolean("is_public").default(true),
+  editPassword: varchar("edit_password", { length: 255 }),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
