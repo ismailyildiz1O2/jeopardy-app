@@ -61,7 +61,7 @@ export default function PasswordPromptModal({
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-sm bg-jeopardy-dark/95 border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-sm bg-jeopardy-deep/95 border border-white/10 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md"
           >
             <div className="p-6 text-center">
               <div className="w-12 h-12 bg-jeopardy-purple/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-jeopardy-purple/30">

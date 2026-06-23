@@ -72,7 +72,7 @@ export default function SettingsModal({
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-md bg-jeopardy-dark/95 border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-md bg-jeopardy-deep/95 border border-white/10 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md"
           >
             <div className="p-5 border-b border-white/10 flex justify-between items-center">
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
