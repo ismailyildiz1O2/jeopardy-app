@@ -72,9 +72,9 @@ export default function SettingsModal({
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-md bg-jeopardy-deep/95 border border-white/10 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md"
+            className="relative w-full max-w-md max-h-[90vh] flex flex-col bg-jeopardy-deep/95 border border-white/10 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md"
           >
-            <div className="p-5 border-b border-white/10 flex justify-between items-center">
+            <div className="p-5 border-b border-white/10 shrink-0 flex justify-between items-center">
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
                 Game Settings
               </h2>
@@ -83,7 +83,7 @@ export default function SettingsModal({
               </button>
             </div>
 
-            <div className="p-6 space-y-6">
+            <div className="p-6 space-y-6 overflow-y-auto">
               {/* Visibility Toggle */}
               <div className="space-y-3">
                 <label className="text-sm font-medium text-white/70">Game Visibility</label>
@@ -145,7 +145,7 @@ export default function SettingsModal({
               </div>
             </div>
 
-            <div className="p-5 border-t border-white/10 flex justify-end gap-3">
+            <div className="p-5 border-t border-white/10 shrink-0 flex justify-end gap-3">
               <button onClick={onClose} className="px-5 py-2 rounded-lg text-white/60 hover:text-white transition-colors text-sm font-medium">
                 Cancel
               </button>
