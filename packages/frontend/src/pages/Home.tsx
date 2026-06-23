@@ -41,11 +41,8 @@ export default function Home() {
     try {
       const data = await api.getGameByCode(code);
       toast.success('Joined the game!');
-      // Navigate to play or edit based on game mode
-      const path =
-        data.game.mode === 'play'
-          ? `/game/${data.game.id}/play`
-          : `/game/${data.game.id}/edit`;
+      // Her zaman ilk girişte play modunda açılsın
+      const path = `/game/${data.game.id}/play`;
       navigate(path);
     } catch {
       toast.error('Game not found. Check your code.');
