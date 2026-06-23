@@ -11,11 +11,9 @@ import {
   Users,
   Wifi,
   WifiOff,
-  Settings,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import ModeToggle from './ModeToggle';
-import SettingsModal from './SettingsModal';
 import type { GameMode } from '../../types';
 
 interface HeaderProps {
@@ -47,7 +45,6 @@ export default function Header({
   const [isCopied, setIsCopied] = useState(false);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   async function handleCopyCode() {
     try {
@@ -182,30 +179,11 @@ export default function Header({
             )}
           </button>
 
-          {/* Settings button */}
-          <button
-            onClick={() => setIsSettingsOpen(true)}
-            className="p-2 rounded-lg bg-white/5 hover:bg-white/10
-                       transition-colors"
-            title="Settings"
-          >
-            <Settings className="w-4 h-4 text-white/60" />
-          </button>
-
           {/* Mode toggle */}
           <ModeToggle mode={mode} onModeChange={handleModeSwitch} gameId={gameId} />
         </div>
       </div>
 
-      {isSettingsOpen && (
-        <SettingsModal
-          isOpen={isSettingsOpen}
-          onClose={() => setIsSettingsOpen(false)}
-          gameId={gameId}
-          initialIsPublic={isPublic}
-          onUpdate={(newIsPublic) => onPublicChange?.(newIsPublic)}
-        />
-      )}
     </motion.header>
   );
 }

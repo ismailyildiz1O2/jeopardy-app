@@ -8,6 +8,7 @@ import { Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import BoardGrid from '../components/Board/BoardGrid';
 import EditPanel from '../components/Edit/EditPanel';
+import SettingsSidebar from '../components/Edit/SettingsSidebar';
 import Header from '../components/Layout/Header';
 import { useGameContext } from '../context/GameContext';
 import { useGame } from '../hooks/useGame';
@@ -33,6 +34,7 @@ export default function GameEditor() {
   // Edit panel state
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
   const [isEditPanelOpen, setIsEditPanelOpen] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   // Auth check for edit mode
   useEffect(() => {
@@ -128,6 +130,21 @@ export default function GameEditor() {
     [gameId]
   );
 
+  const handlePublicChange = useCallback(
+    (newIsPublic: boolean) => {
+      // Just update local state representation if needed, 
+      // Header relies on game.game.isPublic but we can let refetch handle it or just rely on API.
+      // Alternatively, we dispatch an update or mutate game context.
+      if (gameId) {
+        dispatch({
+          type: 'UPDATE_GAME_SETTINGS',
+          payload: { isPublic: newIsPublic },
+        });
+      }
+    },
+    [dispatch, gameId]
+  );
+
   // ─── Loading & Error States ──────────────────────────
 
   if (loading) {
@@ -190,15 +207,17 @@ export default function GameEditor() {
         onModeChange={handleModeChange}
         onTitleChange={handleTitleChange}
         isPublic={game.game.isPublic}
+        onPublicChange={handlePublicChange}
       />
 
-      {/* Board */}
-      <main className="flex-1 px-2 sm:px-4 lg:px-6 py-4">
+      {/* Main content */}
+      <div className="flex-1 flex flex-col lg:flex-row gap-4 px-2 sm:px-4 lg:px-6 pb-4 pt-4">
+        {/* Board */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="max-w-[1600px] mx-auto"
+          className="flex-1"
         >
           <BoardGrid
             mode="edit"
@@ -209,7 +228,33 @@ export default function GameEditor() {
             currentUserId={socket.id}
           />
         </motion.div>
-      </main>
+
+        {/* Settings Sidebar */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 }}
+          className="w-full lg:w-72 xl:w-80 space-y-4"
+        >
+          {/* Mobile toggle for sidebar */}
+          <button
+            onClick={() => setShowSidebar(!showSidebar)}
+            className="lg:hidden w-full btn-ghost text-xs flex items-center justify-center gap-2"
+          >
+            {showSidebar ? 'Ayarları Gizle' : 'Ayarlar'}
+          </button>
+
+          <div
+            className={`h-full ${showSidebar ? 'block' : 'hidden lg:block'}`}
+          >
+            <SettingsSidebar
+              gameId={game.game.id}
+              initialIsPublic={game.game.isPublic ?? true}
+              onUpdate={handlePublicChange}
+            />
+          </div>
+        </motion.div>
+      </div>
 
       {/* Edit Panel */}
       {selectedQuestion && selectedCategory && (
